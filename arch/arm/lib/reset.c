@@ -35,3 +35,8 @@ int do_reset(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 	/*NOTREACHED*/
 	return 0;
 }
+
+/* HACK */
+__weak void s_init(void)
+{
+}

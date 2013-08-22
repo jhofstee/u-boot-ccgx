@@ -195,22 +195,22 @@ pll_div_val5:
 #endif
 
 ENTRY(lowlevel_init)
+#if !defined(CONFIG_SYS_NAND_BOOT) && !defined(CONFIG_SYS_ONENAND_BOOT)
 	ldr	sp, SRAM_STACK
 	str	ip, [sp]	/* stash ip register */
 	mov	ip, lr		/* save link reg across call */
-#if !defined(CONFIG_SYS_NAND_BOOT) && !defined(CONFIG_SYS_ONENAND_BOOT)
 /*
  * No need to copy/exec the clock code - DPLL adjust already done
  * in NAND/oneNAND Boot.
  */
 	ldr	r1, =SRAM_CLK_CODE
 	bl	cpy_clk_code
-#endif /* NAND Boot */
+
 	mov	lr, ip		/* restore link reg */
 	ldr	ip, [sp]	/* restore save ip */
-	/* tail-call s_init to setup pll, mux, memory */
-	b	s_init
+#endif /* NAND Boot */
 
+	mov	pc, lr
 ENDPROC(lowlevel_init)
 
 	/* the literal pools origin */

@@ -59,14 +59,10 @@ loop0:
 	subs r0, r0, #1
 	bne  loop0
 
-	ldr sp, MERAM_STACK
-	b s_init
+	mov pc, lr
 
 	.pool
 	.align 4
 
 ENDPROC(lowlevel_init)
 	.ltorg
-
-MERAM_STACK:
-	.word LOW_LEVEL_MERAM_STACK

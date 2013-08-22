@@ -296,17 +296,6 @@ common_tc:
 	ldr	sp,	SRAM_STACK
 	bic	sp, sp, #7 /* 8-byte alignment for ABI compliance */
 
-	/*
-	 * Save the old lr(passed in ip) and the current lr to stack
-	 */
-	push	{ip, lr}
-
-	/*
-	 * go setup pll, mux, memory
-	 */
-	bl	s_init
-	pop	{ip, pc}
-
 	/* back to arch calling code */
 	mov	pc,	lr
 
