@@ -15,7 +15,9 @@
 
 /* Pointer to as well as the global data structure for SPL */
 DECLARE_GLOBAL_DATA_PTR;
+#ifdef CONFIG_SPL_GD_GLOBAL
 gd_t gdata __attribute__ ((section(".data")));
+#endif
 
 /*
  * In the context of SPL, board_init_f must ensure that any clocks/etc for
@@ -27,9 +29,6 @@ void __weak board_init_f(ulong dummy)
 {
 	/* Clear the BSS. */
 	memset(__bss_start, 0, __bss_end - __bss_start);
-
-	/* Set global data pointer. */
-	gd = &gdata;
 
 	board_init_r(NULL, 0);
 }
