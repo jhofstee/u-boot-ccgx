@@ -140,6 +140,9 @@ $(OBJTREE)/MLO:	$(obj)u-boot-spl.bin
 	$(OBJTREE)/tools/mkimage -T omapimage \
 		-a $(CONFIG_SPL_TEXT_BASE) -d $< $@
 
+$(OBJTREE)/MLO.img: $(OBJTREE)/MLO
+	mkimage -A arm -T kernel -C none -n 'MLO' -d $< $@
+
 $(OBJTREE)/MLO.byteswap: $(obj)u-boot-spl.bin
 	$(OBJTREE)/tools/mkimage -T omapimage -n byteswap \
 		-a $(CONFIG_SPL_TEXT_BASE) -d $< $@
@@ -147,7 +150,7 @@ $(OBJTREE)/MLO.byteswap: $(obj)u-boot-spl.bin
 $(OBJTREE)/SPL : $(obj)u-boot-spl.bin depend
 		$(MAKE) $(build) $(SRCTREE)/arch/arm/imx-common $@
 
-ALL-y	+= $(obj)$(SPL_BIN).bin
+ALL-y	+= $(obj)$(SPL_BIN).bin $(OBJTREE)/MLO.img
 
 ifdef CONFIG_SAMSUNG
 ALL-y	+= $(obj)$(BOARD)-spl.bin
