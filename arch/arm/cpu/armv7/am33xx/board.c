@@ -226,7 +226,9 @@ void s_init(void)
 	gd->have_console = 1;
 #else
 	gd = &gdata;
+# ifdef CONFIG_SPL_BUILD
 	preloader_console_init();
+# endif
 #endif
 #if defined(CONFIG_SPL_BUILD) || defined(CONFIG_NOR_BOOT)
 	prcm_init();
