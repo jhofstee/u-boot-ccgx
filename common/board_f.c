@@ -999,7 +999,7 @@ static init_fnc_t init_sequence_f[] = {
 
 void board_init_f(ulong boot_flags)
 {
-#ifndef CONFIG_X86
+#if !defined(CONFIG_X86) && !defined(CONFIG_ARM)
 	gd_t data;
 
 	gd = &data;
