@@ -50,8 +50,7 @@ void board_init_f(ulong dummy)
 	/* Third, we clear the BSS. */
 	memset(__bss_start, 0, __bss_end - __bss_start);
 
-	/* Finally, setup gd and move to the next step. */
-	gd = &gdata;
+	/* Finally move to the next step. */
 	board_init_r(NULL, 0);
 }
 

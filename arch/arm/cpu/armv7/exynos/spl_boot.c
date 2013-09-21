@@ -149,9 +149,8 @@ void memzero(void *s, size_t n)
  *
  * @param gdp   Value to give to gd
  */
-static void setup_global_data(gd_t *gdp)
+static void setup_global_data(void)
 {
-	gd = gdp;
 	memzero((void *)gd, sizeof(gd_t));
 	gd->flags |= GD_FLG_RELOC;
 	gd->baudrate = CONFIG_BAUDRATE;
@@ -160,10 +159,9 @@ static void setup_global_data(gd_t *gdp)
 
 void board_init_f(unsigned long bootflag)
 {
-	__aligned(8) gd_t local_gd;
 	__attribute__((noreturn)) void (*uboot)(void);
 
-	setup_global_data(&local_gd);
+	setup_global_data();
 
 	if (do_lowlevel_init())
 		power_exit_wakeup();

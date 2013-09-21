@@ -143,8 +143,6 @@ void s_init(void)
 	srcomp_enable();
 	setup_clocks_for_console();
 
-	gd = &gdata;
-
 	preloader_console_init();
 	do_io_settings();
 #endif

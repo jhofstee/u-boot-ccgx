@@ -225,7 +225,6 @@ void s_init(void)
 	serial_init();
 	gd->have_console = 1;
 #else
-	gd = &gdata;
 # ifdef CONFIG_SPL_BUILD
 	preloader_console_init();
 # endif

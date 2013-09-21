@@ -240,8 +240,6 @@ void s_init(void)
 #endif
 
 #ifdef CONFIG_SPL_BUILD
-	gd = &gdata;
-
 	preloader_console_init();
 
 	timer_init();
