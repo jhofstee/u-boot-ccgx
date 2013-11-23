@@ -43,7 +43,7 @@ int display_draw_bitmap(ulong bitmap, int x, int y)
 {
 	if (!bitmap)
 		return API_EINVAL;
-#ifdef CONFIG_LCD
+#if defined(CONFIG_LCD) && (defined(CONFIG_CMD_BMP) || defined(CONFIG_SPLASH_SCREEN))
 	return lcd_display_bitmap(bitmap, x, y);
 #else
 	return API_ENODEV;
