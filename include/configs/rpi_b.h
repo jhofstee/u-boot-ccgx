@@ -54,6 +54,11 @@
 /* Flash */
 #define CONFIG_SYS_NO_FLASH
 
+/* ELF / API support */
+#define CONFIG_CMD_ELF
+#define CONFIG_API
+#define CONFIG_SYS_MMC_MAX_DEVICE 4
+
 /* Devices */
 /* GPIO */
 #define CONFIG_BCM2835_GPIO
