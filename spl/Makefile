@@ -81,6 +81,7 @@ LIBS-$(CONFIG_SPL_ETH_SUPPORT) += drivers/net/phy/
 LIBS-$(CONFIG_SPL_USBETH_SUPPORT) += drivers/net/phy/
 LIBS-$(CONFIG_SPL_MUSB_NEW_SUPPORT) += drivers/usb/musb-new/
 LIBS-$(CONFIG_SPL_USBETH_SUPPORT) += drivers/usb/gadget/
+LIBS-$(CONFIG_SPL_VIDEO_SUPPORT) += drivers/video/
 LIBS-$(CONFIG_SPL_WATCHDOG_SUPPORT) += drivers/watchdog/
 
 ifneq (,$(CONFIG_MX23)$(CONFIG_MX35)$(filter $(SOC), mx25 mx27 mx5 mx6 mx31 mx35))
