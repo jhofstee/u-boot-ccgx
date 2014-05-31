@@ -927,7 +927,7 @@ void board_init_r(gd_t *new_gd, ulong dest_addr)
 	int i;
 #endif
 
-#ifndef CONFIG_X86
+#ifdef CONFIG_SYS_GENERIC_GLOBAL_DATA
 	gd = new_gd;
 #endif
 
