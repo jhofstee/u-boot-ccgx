@@ -239,17 +239,22 @@ void s_init(void)
 	ehci_clocks_enable();
 #endif
 
-#ifdef CONFIG_SPL_BUILD
-	gd = &gdata;
-
-	preloader_console_init();
-
-	timer_init();
-#endif
-
 	if (!in_sdram)
 		mem_init();
 }
+
+#ifdef CONFIG_SPL_BUILD
+void board_init_f(ulong dummy)
+{
+	/* Clear the BSS. */
+	memset(__bss_start, 0, __bss_end - __bss_start);
+
+	preloader_console_init();
+	timer_init();
+
+        board_init_r(NULL, 0);
+}
+#endif
 
 /*
  * Routine: misc_init_r
