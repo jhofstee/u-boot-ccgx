@@ -1,0 +1,30 @@
+NOTE: target compilation only work for (some) ARM boards
+at the moment. Also Aarch64 is not supported.
+
+The Debian clang package does not have ARM support. It must be
+compiled manually.
+
+To compile U-Boot with llvm and IAS (which is default for 3.5) use e.g.:
+export CROSS_COMPILE=arm-linux-gnueabi-; make HOSTCC=clang CC="clang -target $CROSS_COMPILE -B/usr/arm-linux-gnueabi/lib/ -mllvm -arm-use-movt=0" V=1 twister_config all -j8
+
+If all is well you end up on the target with e.g.:
+
+ver
+U-Boot 2014.07-rc2-00067-gd410009 (May 31 2014 - 20:01:13)
+clang version 3.5.0 (https://github.com/llvm-mirror/clang.git 9d0a0d8e196610bb7fef57a5fa034b2f628f870f) (https://github.com/llvm-mirror/llvm.git f2928b9b5f3d2af68f724af16cdaed2628fddfc9)
+GNU ld (GNU Binutils for Ubuntu) 2.23.52.20130913
+
+FreeBSD 11 (Current):
+--------------------
+Since llvm 3.4 is currently in the base system, the integrated as is incapable
+of building U-Boot. Therefore gas from devel/arm-eabi-binutils is used instead.
+It needs a small hack to be picked up though:
+
+ln -s /usr/local/bin/arm-eabi-as /usr/bin/arm-freebsd-eabi-as
+
+# the following commands should  compile U-Boot with the xdev toolchain.
+# NOTE: CROSS_COMPILE and target differ on purpose!
+export CROSS_COMPILE=arm-eabi-
+export CLANG="clang -target arm-freebsd-eabi --sysroot /usr/arm-freebsd -no-integrated-as -mllvm -arm-use-movt=0"
+gmake HOSTCC=cc CC="$CLANG" twister_config
+gmake HOSTCC=cc CC="$CLANG" -j8
