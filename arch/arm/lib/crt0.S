@@ -70,6 +70,12 @@ ENTRY(_main)
 	sub	sp, sp, #GD_SIZE	/* allocate one GD above SP */
 	bic	sp, sp, #7	/* 8-byte alignment for ABI compliance */
 	mov	r9, sp		/* GD is above SP */
+
+	mov	r0, r9		/* Clear the global data */
+	mov	r1, #0
+	mov	r2, #GENERATED_GBL_DATA_SIZE
+	bl	memset
+
 	mov	r0, #0
 	bl	board_init_f
 
